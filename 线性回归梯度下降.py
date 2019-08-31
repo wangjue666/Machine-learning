@@ -1,5 +1,6 @@
 import numpy as  np
 import matplotlib.pyplot as plt
+
 points=np.genfromtxt("./data.csv",delimiter=',')
 
 x=points[:,0]
