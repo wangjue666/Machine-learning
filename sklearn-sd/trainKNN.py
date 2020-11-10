@@ -1,5 +1,7 @@
 from sklearn import datasets
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
 iris = datasets.load_iris()
 
 
@@ -22,3 +24,11 @@ print(r5)
 
 #确认模型结构
 print(knn5)
+
+
+y5_pred = knn5.predict(X)
+
+print('k=5准确率是',accuracy_score(y, y5_pred))
+
+y_pred = knn.predict(X)
+print('k=1准确率是',accuracy_score(y, y_pred))
