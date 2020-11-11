@@ -2,6 +2,7 @@ from sklearn import datasets
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
 iris = datasets.load_iris()
 
 
@@ -46,3 +47,28 @@ y_train_pred = knn_5_s.predict(X_train)
 y_test_pred = knn_5_s.predict(X_test)
 
 print("分离后数据预测", accuracy_score(y_train, y_train_pred), accuracy_score(y_test, y_test_pred))
+
+
+
+#如何确定更合适的K值
+
+k_range = list(range(1, 26))
+
+score_train = []
+score_test = []
+
+for k in k_range:
+    knn = KNeighborsClassifier(n_neighbors= k)
+    knn.fit(X_train, y_train)
+    y_train_pred = knn.predict(X_train)
+    y_test_pred = knn.predict(X_test)
+    score_train.append(accuracy_score(y_train, y_train_pred))
+    score_test.append(accuracy_score(y_test, y_test_pred))
+    print('k is', k, score_train[k-1], score_test[k-1])
+
+
+plt.plot(k_range, score_test)
+plt.xlabel('k(knn model)')
+plt.ylabel('Testing accuracy')
+
+plt.show()
