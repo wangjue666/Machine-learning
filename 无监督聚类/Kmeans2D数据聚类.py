@@ -72,3 +72,28 @@ for i in y_predict:
         y_corrected.append(5)
     else:
         y_corrected.append(3)
+
+
+#establish a KNN model
+KNN = KNeighborsClassifier(n_neighbors=5)
+KNN.fit(x,y)
+KNN.predict([[5,0]])
+y_predict2 = KNN.predict(x)       
+
+print("KNN accuracy", accuracy_score(y, y_predict2))
+print(pd.value_counts(y_predict2))
+
+
+#establish a meanshift model
+
+bw = estimate_bandwidth(x,n_samples=120)
+print(bw)
+ms = MeanShift(bandwidth=bw)
+ms.fit(x)
+y_predict_ms = ms.predict(x)
+print("meanshift 归类结果", pd.value_counts(y_predict_ms))
+fig5 = plt.figure()
+label1 = plt.scatter(x['x'][y_predict_ms==1],x['y'][y_predict_ms==1])
+label2 = plt.scatter(x['x'][y_predict_ms==0],x['y'][y_predict_ms==0])
+plt.legend((label1,label2),('label1','label2'))
+plt.show()
