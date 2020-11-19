@@ -5,7 +5,7 @@ ehthumbs_vista.db
 node_modules
 # Folder config file
 Desktop.ini
-
+dataset
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
@@ -21,3 +21,4 @@ $RECYCLE.BIN/
 # =========================
 # Operating System Files
 # =========================
+*.jpg
