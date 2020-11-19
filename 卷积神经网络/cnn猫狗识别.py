@@ -60,3 +60,4 @@ pic_cat = pic_cat/255
 pic_cat = pic_cat.reshape(1,50,50,3)
 result_cat = model.predict_classes(pic_cat)
 print('猫的预测结果', result_cat)
+print('分类结果', training_set.class_indices)
