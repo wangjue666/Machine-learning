@@ -61,4 +61,26 @@ plt.title('close price')
 plt.xlabel('time')
 plt.ylabel('price')
 plt.legend()
+#plt.show()
+
+
+data_test = pd.read_csv('zgpa_test.csv')
+
+price_test = data_test.loc[:, 'close']
+
+#extract X_test and y_test
+price_test_norm = price_test / max(price)
+X_test_norm, y_test_norm = extract_data(price_test_norm, time_step)
+
+#make prediction based on the test data
+y_test_predict = model.predict(X_test_norm) * max(price)
+y_test = [i * max(price) for i in y_test_norm]
+
+fig3 = plt.figure(figsize=(8, 5))
+plt.plot(y_test, label='real price_test')
+plt.plot(y_test_predict, label = 'predict price_test')
+plt.title('close price')
+plt.xlabel('time')
+plt.ylabel('price')
+plt.legend()
 plt.show()
