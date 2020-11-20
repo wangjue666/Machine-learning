@@ -3,6 +3,7 @@ from keras.utils import to_categorical
 from sklearn.model_selection import train_test_split
 from keras.models import Sequential
 from keras.layers import Dense, LSTM
+from sklearn.metrics import accuracy_score
 #load the data
 data = open('flare.txt').read()
 #移除换行符
@@ -79,3 +80,18 @@ model.fit(X_train, y_train_category, batch_size=1000, epochs=5)
 #make prediction based on the training data
 y_train_predict = model.predict_classes(X_train)
 y_train_predict_char = [int_to_char[i] for i in y_train_predict]
+
+accuracy_train = accuracy_score(y_train, y_train_predict)
+
+y_test_predict = model.predict_classes(X_test)
+accuracy_test = accuracy_score(y_test, y_test_predict)
+print("准确率是", accuracy_train, accuracy_test)
+
+new_letters = 'flare is a teacher in ai industry. He obtained his phd in Australia. Australia is a country in the Southern Hemisphere.flare is a teacher in ai industry. He obtained his phd in Australia. Australia is a country in the Southern Hemisphere.flare is a teacher in ai industry. He obtained his phd in Australia. Australia is a country in the Southern Hemisphere.flare is a teacher in ai industry. He obtained his phd in Australia. Australia is a country in the Southern Hemisphere.'
+X_new, y_new = data_preprocessing(new_letters, time_step, num_letters,char_to_int)
+y_new_predict = model.predict_classes(X_new)
+
+y_new_predict_char = [int_to_char[i] for i in y_new_predict]
+for i in range(0, X_new.shape[0]):
+    print(new_letters[i:i + 20], '--predict next letter is--',
+          y_new_predict_char[i])
